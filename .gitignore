@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# База напоминаний — личные данные, создаётся при запуске
+*.db
+*.db-journal
+
+# Локальные настройки Claude Code
+.claude/settings.local.json
+
+# macOS
+.DS_Store
