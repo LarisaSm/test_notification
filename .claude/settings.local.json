@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import tkinter; print\\(tkinter.TkVersion\\)\")",
+      "Bash(python3 -m py_compile db.py notifier.py gui.py main.py)",
+      "Bash(python3 -)",
+      "Bash(sed -i '' 's/    def list\\(self, status/    def get_all\\(self, status/' db.py)",
+      "Bash(sed -i '' 's/self\\\\.db\\\\.list\\(/self.db.get_all\\(/' gui.py)",
+      "Bash(git init *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(xcode-select -p)",
+      "Read(//Library/Developer/CommandLineTools/**)",
+      "Read(//Applications/**)",
+      "Bash(sw_vers)",
+      "Bash(pkgutil --pkg-info=com.apple.pkg.CLTools_Executables)",
+      "Bash(curl -s https://www.python.org/downloads/macos/)"
+    ]
+  }
+}
