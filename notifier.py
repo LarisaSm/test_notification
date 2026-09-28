@@ -70,8 +70,10 @@ class ReminderPopup(tk.Toplevel):
 
         ttk.Label(body, text=reminder.title, font=("Helvetica", 18, "bold"),
                   wraplength=380).pack(anchor="w")
-        ttk.Label(body, text=reminder.due_at.strftime("%d.%m.%Y %H:%M"),
-                  foreground="gray").pack(anchor="w", pady=(2, 10))
+        when = reminder.due_at.strftime("%d.%m.%Y %H:%M")
+        if reminder.is_recurring:
+            when += f"  ·  повтор: {reminder.repeat_label}"
+        ttk.Label(body, text=when, foreground="gray").pack(anchor="w", pady=(2, 10))
         if reminder.description:
             ttk.Label(body, text=reminder.description, wraplength=380,
                       justify="left").pack(anchor="w", pady=(0, 12))
@@ -137,6 +139,7 @@ class ReminderScheduler:
 
         for reminder in self.db.get_due_for_notification(now):
             self.db.mark_notified(reminder.id)
+            self.db.spawn_next(reminder.id, now)
             self._notify(reminder)
             changed = True
 
